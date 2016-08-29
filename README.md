@@ -6,4 +6,5 @@ dependencies.
 
 Tested on CentOS 7.2.1511 only.
 
-Manually, make sure you yum install any packages described at the start of the build script.
+Manually, make sure you yum install any packages described at the start of the build script,
+see build.sh yum commands.
