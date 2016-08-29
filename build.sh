@@ -43,6 +43,10 @@ if [ ! -d twolame-0.3.13 ]; then
 	tar zxf twolame-0.3.13.tar.gz
 fi
 
+if [ ! -d "Blackmagic DeckLink SDK 10.6.5" ]; then
+	unzip Blackmagic_DeckLink_SDK_10.6.5.zip
+fi
+
 pushd libmpegts-obe
 	./configure --prefix=$PWD/../target-root/usr/local
 	make && make install
