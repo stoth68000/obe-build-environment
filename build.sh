@@ -39,6 +39,10 @@ if [ ! -d libyuv ]; then
 	git clone https://chromium.googlesource.com/libyuv/libyuv
 fi
 
+if [ ! -d obe-bitstream ]; then
+	git clone git@github.com:stoth68000/obe-bitstream.git
+fi
+
 if [ ! -d twolame-0.3.13 ]; then
 	tar zxf twolame-0.3.13.tar.gz
 fi
@@ -82,6 +86,10 @@ pushd libyuv
 	make -f linux.mk
 	cp -r include/* $PWD/../target-root/usr/local/include
 	cp libyuv.a $PWD/../target-root/usr/local/lib
+popd
+
+pushd obe-bitstream
+	make PREFIX=$PWD/../target-root/usr/local install
 popd
 
 pushd obe-rt
