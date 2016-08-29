@@ -45,6 +45,7 @@ fi
 
 if [ ! -d "Blackmagic DeckLink SDK 10.6.5" ]; then
 	unzip Blackmagic_DeckLink_SDK_10.6.5.zip
+	ln -fs 'Blackmagic DeckLink SDK 10.6.5' decklink-sdk
 fi
 
 pushd libmpegts-obe
@@ -88,7 +89,8 @@ pushd obe-rt
 	export PKG_CONFIG_PATH=$PWD/../target-root/usr/local/lib/pkgconfig
 	./configure \
 		--extra-ldflags="-L$PWD/../target-root/usr/local/lib -lfdk-aac -lavutil -lasound -lyuv" \
-		--extra-cflags="-I$PWD/../target-root/usr/local/include -ldl"
+		--extra-cflags="-I$PWD/../target-root/usr/local/include -ldl" \
+		--extra-cxxflags="-I$PWD/../decklink-sdk/Linux"
 	make
 	DESTDIR=$PWD/../target-root make install
 popd
