@@ -15,6 +15,10 @@ JOBS=8
 #yum install pulseaudio-libs-devel
 #perl -MCPAN -e 'install Digest::Perl::MD5'
 
+if [ ! -d libklvanc ]; then
+	git clone git@github.com:stoth68000/libklvanc.git
+fi
+
 if [ ! -d obe-rt ]; then
 	git clone git@github.com:stoth68000/obe-rt.git
 fi
@@ -51,6 +55,13 @@ if [ ! -d "Blackmagic DeckLink SDK 10.6.5" ]; then
 	unzip Blackmagic_DeckLink_SDK_10.6.5.zip
 	ln -fs 'Blackmagic DeckLink SDK 10.6.5' decklink-sdk
 fi
+
+pushd libklvanc
+	./autogen.sh --build
+	./configure --enable-shared=no --prefix=$PWD/../target-root/usr/local
+	make && make install
+	make install
+popd
 
 pushd libmpegts-obe
 	./configure --prefix=$PWD/../target-root/usr/local
@@ -96,7 +107,7 @@ pushd obe-rt
 	export CXXFLAGS="-I$PWD/../target-root/usr/local/include -ldl"
 	export PKG_CONFIG_PATH=$PWD/../target-root/usr/local/lib/pkgconfig
 	./configure \
-		--extra-ldflags="-L$PWD/../target-root/usr/local/lib -lfdk-aac -lavutil -lasound -lyuv" \
+		--extra-ldflags="-L$PWD/../target-root/usr/local/lib -lfdk-aac -lavutil -lasound -lyuv -lklvanc" \
 		--extra-cflags="-I$PWD/../target-root/usr/local/include -ldl" \
 		--extra-cxxflags="-I$PWD/../decklink-sdk/Linux"
 	make
