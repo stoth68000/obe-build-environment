@@ -15,8 +15,17 @@ JOBS=8
 #yum install pulseaudio-libs-devel
 #perl -MCPAN -e 'install Digest::Perl::MD5'
 
+
+if [ ! -d bitstream ]; then
+	git clone https://code.videolan.org/videolan/bitstream.git
+fi
+
 if [ ! -d libklvanc ]; then
 	git clone git@github.com:stoth68000/libklvanc.git
+fi
+
+if [ ! -d libklscte35 ]; then
+	git clone git@github.com:stoth68000/libklscte35.git
 fi
 
 if [ ! -d obe-rt ]; then
@@ -55,6 +64,18 @@ if [ ! -d "Blackmagic DeckLink SDK 10.6.5" ]; then
 	unzip Blackmagic_DeckLink_SDK_10.6.5.zip
 	ln -fs 'Blackmagic DeckLink SDK 10.6.5' decklink-sdk
 fi
+
+
+pushd bitstream
+	make PREFIX=$PWD/../target-root/usr/local install
+popd
+
+pushd libklscte35
+	./autogen.sh --build
+	export CFLAGS="-I$PWD/../target-root/usr/local/include"
+	./configure --enable-shared=no --prefix=$PWD/../target-root/usr/local
+	make && make install
+popd
 
 pushd libklvanc
 	./autogen.sh --build
