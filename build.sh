@@ -66,7 +66,7 @@ if [ ! -d "Blackmagic DeckLink SDK 10.6.5" ]; then
 fi
 
 
-pushd bitstream
+pushd obe-bitstream
 	make PREFIX=$PWD/../target-root/usr/local install
 popd
 
