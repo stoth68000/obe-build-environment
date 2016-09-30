@@ -9,7 +9,7 @@ Tested on CentOS 7.2.1511 only.
 Manually, make sure you yum install any packages described at the start of the build script,
 see build.sh yum commands.
 
-# Any dependencies are automatically downloaded during the build process.
+# Any sub-repo dependencies are automatically downloaded during the build process.
 $ git clone https://github.com/stoth68000/obe-build-environment build
 $ cd build
 $ ./build.sh experimental
