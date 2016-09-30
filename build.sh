@@ -15,9 +15,9 @@ JOBS=8
 #yum install pulseaudio-libs-devel
 #perl -MCPAN -e 'install Digest::Perl::MD5'
 
-
-if [ ! -d bitstream ]; then
-	git clone https://code.videolan.org/videolan/bitstream.git
+EXPERIMENTAL=0
+if [ "$1" == "experimental" ]; then
+	EXPERIMENTAL=1
 fi
 
 if [ ! -d libklvanc ]; then
@@ -30,6 +30,9 @@ fi
 
 if [ ! -d obe-rt ]; then
 	git clone git@github.com:stoth68000/obe-rt.git
+	if [ $EXPERIMENTAL -eq 1 ]; then
+		cd obe-rt && git checkout experimental && cd ..
+	fi
 fi
 
 if [ ! -d x264-obe ]; then
