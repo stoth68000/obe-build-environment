@@ -1,0 +1,13 @@
+Blackmagic DeckLink SDK 10.6.5/
+decklink-sdk
+fdk-aac/
+libav-obe/
+libklscte35/
+libklvanc/
+libmpegts-obe/
+libyuv/
+obe-bitstream/
+obe-rt/
+target-root/
+twolame-0.3.13/
+x264-obe/
