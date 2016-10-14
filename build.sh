@@ -73,18 +73,19 @@ pushd obe-bitstream
 	make PREFIX=$PWD/../target-root/usr/local install
 popd
 
-pushd libklscte35
-	./autogen.sh --build
-	export CFLAGS="-I$PWD/../target-root/usr/local/include"
-	./configure --enable-shared=no --prefix=$PWD/../target-root/usr/local
-	make && make install
-popd
-
 pushd libklvanc
 	./autogen.sh --build
 	./configure --enable-shared=no --prefix=$PWD/../target-root/usr/local
 	make && make install
 	make install
+popd
+
+pushd libklscte35
+	./autogen.sh --build
+	export CFLAGS="-I$PWD/../target-root/usr/local/include"
+	export LDFLAGS="-L$PWD/../target-root/usr/local/lib"
+	./configure --enable-shared=no --prefix=$PWD/../target-root/usr/local
+	make && make install
 popd
 
 pushd libmpegts-obe
