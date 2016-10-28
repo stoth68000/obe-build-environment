@@ -101,7 +101,7 @@ popd
 
 pushd x264-obe
 	make clean
-	./configure --enable-static --disable-cli --prefix=$PWD/../target-root/usr/local
+	./configure --enable-static --disable-cli --prefix=$PWD/../target-root/usr/local --disable-lavf --disable-swscale --disable-opencl
 	make -j$JOBS && make install
 popd
 
@@ -113,6 +113,7 @@ popd
 
 pushd libav-obe
 	./configure --prefix=$PWD/../target-root/usr/local --enable-libfdk-aac --enable-gpl --enable-nonfree \
+		--disable-swscale-alpha --disable-avdevice \
 		--extra-ldflags="-L$PWD/../target-root/usr/local/lib" \
 		--extra-cflags="-I$PWD/../target-root/usr/local/include -ldl"
 	make -j$JOBS && make install
