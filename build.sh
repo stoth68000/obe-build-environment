@@ -21,34 +21,34 @@ if [ "$1" == "experimental" ]; then
 fi
 
 if [ ! -d libklvanc ]; then
-	git clone git@github.com:stoth68000/libklvanc.git
+	git clone https://github.com/stoth68000/libklvanc.git
 fi
 
 if [ ! -d libklscte35 ]; then
-	git clone git@github.com:stoth68000/libklscte35.git
+	git clone https://github.com/stoth68000/libklscte35.git
 fi
 
 if [ ! -d obe-rt ]; then
-	git clone git@github.com:stoth68000/obe-rt.git
+	git clone https://github.com/stoth68000/obe-rt.git
 	if [ $EXPERIMENTAL -eq 1 ]; then
 		cd obe-rt && git checkout experimental && cd ..
 	fi
 fi
 
 if [ ! -d x264-obe ]; then
-	git clone git@github.com:stoth68000/x264-obe.git
+	git clone https://github.com/stoth68000/x264-obe.git
 fi
 
 if [ ! -d fdk-aac ]; then
-	git clone git@github.com:stoth68000/fdk-aac.git
+	git clone https://github.com/stoth68000/fdk-aac.git
 fi
 
 if [ ! -d libav-obe ]; then
-	git clone git@github.com:stoth68000/libav-obe.git
+	git clone https://github.com/stoth68000/libav-obe.git
 fi
 
 if [ ! -d libmpegts-obe ]; then
-	git clone git@github.com:stoth68000/libmpegts-obe.git
+	git clone https://github.com/stoth68000/libmpegts-obe.git
 fi
 
 if [ ! -d libyuv ]; then
@@ -56,7 +56,7 @@ if [ ! -d libyuv ]; then
 fi
 
 if [ ! -d obe-bitstream ]; then
-	git clone git@github.com:stoth68000/obe-bitstream.git
+	git clone https://github.com/stoth68000/obe-bitstream.git
 fi
 
 if [ ! -d twolame-0.3.13 ]; then
