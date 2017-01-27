@@ -25,7 +25,7 @@ if [ ! -d libklvanc ]; then
 fi
 
 if [ ! -d libklscte35 ]; then
-	git clone https://github.com/stoth68000/libklscte35.git
+	git clone https://github.com/dheitmueller/libklscte35.git
 fi
 
 if [ ! -d obe-rt ]; then
