@@ -15,23 +15,38 @@ JOBS=8
 #yum install pulseaudio-libs-devel
 #perl -MCPAN -e 'install Digest::Perl::MD5'
 
-EXPERIMENTAL=0
-if [ "$1" == "experimental" ]; then
-	EXPERIMENTAL=1
+if [ "$1" == "" ]; then
+	# Fine if they do not specify a tag
+	echo "No specific tag specified.  Using master"
+elif [ "$1" == "experimental" ]; then
+	OBE_TAG=experimental
+elif [ "$1" == "customerd" ]; then
+	OBE_TAG=customerd-0.1
+	LIBKLVANC_TAG=customerd-0.1
+	LIBKLSCTE35_TAG=customerd-0.1
+else
+	echo "Invalid argument"
+	exit 1
 fi
 
 if [ ! -d libklvanc ]; then
 	git clone https://github.com/LTNGlobal-opensource/libklvanc.git
+	if [ "$LIBKLVANC_TAG" != "" ]; then
+		cd libklvanc && git checkout $LIBKLVANC_TAG && cd ..
+	fi
 fi
 
 if [ ! -d libklscte35 ]; then
 	git clone https://github.com/LTNGlobal-opensource/libklscte35.git
+	if [ "$LIBKLSCTE35_TAG" != "" ]; then
+		cd libklscte35 && git checkout $LIBKLSCTE35_TAG && cd ..
+	fi
 fi
 
 if [ ! -d obe-rt ]; then
 	git clone https://github.com/LTNGlobal-opensource/obe-rt.git
-	if [ $EXPERIMENTAL -eq 1 ]; then
-		cd obe-rt && git checkout experimental && cd ..
+	if [ "$OBE_TAG" != "" ]; then
+		cd obe-rt && git checkout $OBE_TAG && cd ..
 	fi
 fi
 
