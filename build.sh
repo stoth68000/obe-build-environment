@@ -24,6 +24,10 @@ elif [ "$1" == "customerd" ]; then
 	OBE_TAG=customerd-0.1
 	LIBKLVANC_TAG=customerd-0.1
 	LIBKLSCTE35_TAG=customerd-0.1
+elif [ "$1" == "104_refactoring" ]; then
+	OBE_TAG=104_refactoring
+	LIBKLVANC_TAG=104_refactoring
+	LIBKLSCTE35_TAG=104_refactoring
 else
 	echo "Invalid argument"
 	exit 1
