@@ -29,9 +29,9 @@ elif [ "$1" == "104_refactoring" ]; then
 	LIBKLVANC_TAG=104_refactoring
 	LIBKLSCTE35_TAG=104_refactoring
 elif [ "$1" == "vid.obe.1.1" ]; then
-	OBE_TAG=vid.obe.1.1.1
-	LIBKLVANC_TAG=vid.obe.1.1.1
-	LIBKLSCTE35_TAG=vid.obe.1.1.1
+	OBE_TAG=vid.obe.1.1.2
+	LIBKLVANC_TAG=vid.obe.1.1.2
+	LIBKLSCTE35_TAG=vid.obe.1.1.2
 else
 	echo "Invalid argument"
 	exit 1
