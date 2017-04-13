@@ -143,6 +143,8 @@ pushd libav-obe
 popd
 
 pushd libyuv
+	# Make sure we use a known-good version
+	git checkout cbe5385055b9360cacd14877450631b87eea1fcd
 	make -f linux.mk
 	cp -r include/* $PWD/../target-root/usr/local/include
 	cp libyuv.a $PWD/../target-root/usr/local/lib
