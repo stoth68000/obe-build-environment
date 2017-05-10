@@ -32,13 +32,17 @@ elif [ "$1" == "vid.obe.1.1" ]; then
 	OBE_TAG=vid.obe.1.1.2
 	LIBKLVANC_TAG=vid.obe.1.1.2
 	LIBKLSCTE35_TAG=vid.obe.1.1.2
+elif [ "$1" == "a52" ]; then
+	OBE_TAG=""
+	LIBKLVANC_TAG=""
+	LIBKLSCTE35_TAG=vid.obe.1.1.2
 else
 	echo "Invalid argument"
 	exit 1
 fi
 
 if [ ! -d libklvanc ]; then
-	git clone https://github.com/LTNGlobal-opensource/libklvanc.git
+	git clone https://github.com/stoth68000/libklvanc.git
 	if [ "$LIBKLVANC_TAG" != "" ]; then
 		cd libklvanc && git checkout $LIBKLVANC_TAG && cd ..
 	fi
@@ -52,7 +56,7 @@ if [ ! -d libklscte35 ]; then
 fi
 
 if [ ! -d obe-rt ]; then
-	git clone https://github.com/LTNGlobal-opensource/obe-rt.git
+	git clone https://github.com/stoth68000/obe-rt.git
 	if [ "$OBE_TAG" != "" ]; then
 		cd obe-rt && git checkout $OBE_TAG && cd ..
 	fi
@@ -71,7 +75,7 @@ if [ ! -d libav-obe ]; then
 fi
 
 if [ ! -d libmpegts-obe ]; then
-	git clone https://github.com/LTNGlobal-opensource/libmpegts-obe.git
+	git clone https://github.com/stoth68000/libmpegts-obe.git
 fi
 
 if [ ! -d libyuv ]; then
@@ -155,13 +159,12 @@ pushd obe-bitstream
 popd
 
 pushd obe-rt
-	export CXXFLAGS="-I$PWD/../target-root/usr/local/include -ldl"
+	export CFLAGS="-I$PWD/../target-root/usr/local/include -I$PWD/../decklink-sdk/Linux"
+	export LDFLAGS="-L$PWD/../target-root/usr/local/lib"
 	export PKG_CONFIG_PATH=$PWD/../target-root/usr/local/lib/pkgconfig
-	./configure \
-		--extra-ldflags="-L$PWD/../target-root/usr/local/lib -lfdk-aac -lavutil -lasound -lyuv -lklvanc" \
-		--extra-cflags="-I$PWD/../target-root/usr/local/include -ldl" \
-		--extra-cxxflags="-I$PWD/../decklink-sdk/Linux"
-	make
-	DESTDIR=$PWD/../target-root make install
+	./autogen.sh --build
+	./configure --prefix=$PWD/../target-root/usr/local
+	make -j$JOBS
+	make install
 popd
 
