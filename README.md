@@ -12,12 +12,12 @@ see build.sh yum commands.
 # Any sub-repo dependencies are automatically downloaded during the build process.
      $ git clone https://github.com/stoth68000/obe-build-environment build
      $ cd build
-     $ ./build.sh experimental
+     $ ./build.sh a52
      $ ./target-root/usr/local/bin/obecli 
 
      Open Broadcast Encoder command line interface.
      Including Kernel Labs fixups.
-     Version 1.3
+     Version 1.5 (1.0-180-g1e5dea09)
 
      obecli> quit
 
